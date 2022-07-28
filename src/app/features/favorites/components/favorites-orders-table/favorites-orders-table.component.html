@@ -1,0 +1,55 @@
+
+<header>
+    <h4>Favorites orders</h4>
+    <mat-form-field>
+        <input type="text" matInput placeholder="Filter" [(ngModel)]="queryFilter">
+    </mat-form-field>
+</header>
+<div class="table-header" *ngIf="favoritesOrders?.length">
+    <div class="cell w-25">Order name</div>
+    <div class="cell w-20">Age</div>
+    <div class="cell w-20">Full name</div>
+    <div class="cell w-20">Sex</div>
+</div>
+<ng-container *ngFor="let order of favoritesOrders | arrayFilter: queryFilter: 'orderName'">
+    <div class="container-row">
+        <div class="cell w-25">
+            <ng-container *ngIf="order.orderName; else noName">
+                {{order.orderName}}
+            </ng-container>
+            <ng-template #noName>
+                -
+            </ng-template>
+        </div>
+        <div class="cell w-20">
+            <ng-container *ngIf="order?.patient?.age; else noAge">
+                {{order?.patient?.age}}
+            </ng-container>
+            <ng-template #noAge>
+                -
+            </ng-template>
+        </div>
+        <div class="cell w-20">
+            <ng-container *ngIf="order?.patient?.fullName; else noFullName">
+                {{order?.patient?.fullName}}
+            </ng-container>
+            <ng-template #noFullName>
+                -
+            </ng-template>
+        </div>
+        <div class="cell w-20">
+            <ng-container *ngIf="order?.patient?.sex?.name; else noSex">
+                {{order?.patient?.sex?.name}}
+            </ng-container>
+            <ng-template #noSex>
+                -
+            </ng-template>
+        </div>
+        <div class="cell w-15">
+           <span class="material-icons remove-favorite" (click)="removeFromFavorites(order)">
+                highlight_off
+            </span>
+        </div>
+    </div>
+</ng-container>
+

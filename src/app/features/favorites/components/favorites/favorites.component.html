@@ -1,0 +1,12 @@
+<div class="wrap w-100">
+    <div class="w-50">
+        <st-favorites-patients-table [favoritiesPatients]="patientsFacade.favoritiesPatients$ | async"
+            (deleteFromFavorities)="onRemovePatient($event)"
+        ></st-favorites-patients-table>
+    </div>
+    <div class="w-50">
+        <st-favorites-orders-table [favoritesOrders]="ordersFacade.favoritesOrders$ | async"
+                (removeOrder)="onRemoveOrder($event)"
+        ></st-favorites-orders-table>
+    </div>
+</div>

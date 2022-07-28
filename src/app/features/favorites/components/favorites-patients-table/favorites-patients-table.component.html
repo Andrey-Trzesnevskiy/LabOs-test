@@ -1,0 +1,59 @@
+<header>
+    <h4>Favorites patients</h4>
+    <mat-form-field>
+        <input type="text" matInput placeholder="Filter" [(ngModel)]="queryFilter">
+    </mat-form-field>
+</header>
+<div class="table-header" *ngIf="favoritiesPatients?.length">
+    <div class="cell w-25">First name</div>
+    <div class="cell w-20">Phone</div>
+    <div class="cell w-20">Sex</div>
+    <div class="cell w-20">Age</div>
+</div>
+<ng-container *ngFor="let patient of favoritiesPatients | arrayFilter: queryFilter: 'firstName'">
+    <div class="container-row">
+        <div class="cell w-25">
+            <ng-container *ngIf="patient.fullName; else noName">
+                {{patient.firstName}}
+            </ng-container>
+            <ng-template #noName>
+                -
+            </ng-template>
+        </div>
+        <div class="cell w-20">
+            <ng-container *ngIf="patient?.address?.phone1; else noPhone">
+                {{patient?.address?.phone1}}
+            </ng-container>
+            <ng-template #noPhone>
+                -
+            </ng-template>
+        </div>
+        <div class="cell w-20">
+            <ng-container *ngIf="patient.sex?.name; else noSex">
+                {{patient.sex?.name}}
+            </ng-container>
+            <ng-template #noSex>
+                -
+            </ng-template>
+        </div>
+        <div class="cell w-20">
+            <ng-container *ngIf="patient?.calculatedAge; else noCalculatedAge">
+                {{patient?.calculatedAge}}Y
+            </ng-container>
+            <ng-template #noCalculatedAge>
+                <ng-container *ngIf="patient?.age; else noAge">
+                    {{patient?.age}}
+                </ng-container>
+                <ng-template #noAge>
+                    -
+                </ng-template>
+            </ng-template>
+        </div>
+        <div class="cell w-15">
+                <span class="material-icons remove-favorite" (click)="removeFromFavorites(patient)">
+                    highlight_off
+                </span>
+        </div>
+    </div>
+</ng-container>
+

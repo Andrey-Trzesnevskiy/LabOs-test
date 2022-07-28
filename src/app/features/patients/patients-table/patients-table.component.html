@@ -1,0 +1,60 @@
+<header *ngIf="patients?.patient">
+    <div class="cell w-25">Full name</div>
+    <div class="cell w-20">Phone</div>
+    <div class="cell w-20">Sex</div>
+    <div class="cell w-20">Age</div>
+</header>
+<ng-container *ngFor="let patient of patients?.patient">
+    <div class="container-row">
+        <div class="cell w-25">
+            <ng-container *ngIf="patient.fullName; else noName">
+                {{patient.firstName}}
+            </ng-container>
+            <ng-template #noName>
+                -
+            </ng-template>
+        </div>
+        <div class="cell w-20">
+            <ng-container *ngIf="patient?.address?.phone1; else noPhone">
+                {{patient?.address?.phone1}}
+            </ng-container>
+            <ng-template #noPhone>
+                -
+            </ng-template>
+        </div>
+        <div class="cell w-20">
+            <ng-container *ngIf="patient.sex?.name; else noSex">
+                {{patient.sex?.name}}
+            </ng-container>
+            <ng-template #noSex>
+                -
+            </ng-template>
+        </div>
+        <div class="cell w-15">
+            <ng-container *ngIf="patient?.calculatedAge; else noCalculatedAge">
+                {{patient?.calculatedAge}}Y
+            </ng-container>
+            <ng-template #noCalculatedAge>
+                <ng-container *ngIf="patient?.age; else noAge">
+                    {{patient?.age}}
+                </ng-container>
+                <ng-template #noAge>
+                    -
+                </ng-template>
+            </ng-template>
+        </div>
+        <div class="cell w-20 btn-container">
+            <button mat-button (click)="addToFavorites(patient)"
+                [disabled]="patient.isFavorite"
+                >
+                Add to favorites
+            </button>
+            <ng-container *ngIf="patient.isFavorite">
+                <span class="material-icons">
+                    star_border
+                </span>
+            </ng-container>
+        </div>
+    </div>
+</ng-container>
+

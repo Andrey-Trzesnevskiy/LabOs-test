@@ -1,0 +1,33 @@
+@import '~@angular/material/theming';
+
+:host {
+    display: block;
+    padding: 8px;
+}
+
+.container-row {
+    display: flex;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.table-header {
+    display: flex;
+    font-weight: bold;
+    border-bottom: 1px solid black;
+}
+
+.cell {
+    padding: 5px;
+    &:not(:last-child) {
+        border-right: 1px solid black;
+    }
+}
+
+.remove-favorite {
+    cursor: pointer;
+}

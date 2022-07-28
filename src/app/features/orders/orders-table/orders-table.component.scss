@@ -1,0 +1,38 @@
+@import '~@angular/material/theming';
+
+:host {
+    display: block;
+    margin: auto;
+    max-width: 1110px;
+}
+
+.container-row, header {
+    display: flex;
+}
+
+header {
+    font-weight: bold;
+    border-bottom: 1px solid black;
+}
+
+.cell {
+    padding: 5px;
+    &:not(:last-child) {
+        border-right: 1px solid black;
+    }
+}
+
+button {
+    &.mat-button {
+        background: map-get($mat-cyan, 900);
+        color: white;
+    }
+    &.mat-button-disabled {
+        color: gray !important;
+    }
+}
+
+.btn-container {
+    display: flex;
+    align-items: center;
+}
