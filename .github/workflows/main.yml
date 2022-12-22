@@ -11,24 +11,15 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: [16.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
-
     steps:
-    - uses: actions/checkout@v3
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
+    - uses: actions/checkout@master
+    - uses: actions/setup-node@master
       with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-    - run: npm i --force
-    - run: npm run test:ci
-    - run: npm run build --if-present
-     - uses: w9jds/firebase-action@master
+        node-version: '12.x'
+    - run: npm install
+    - run: npm run build:prod
+    - uses: w9jds/firebase-action@master
       with:
         args: deploy --only hosting
       env:
         FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
-    
