@@ -111,6 +111,11 @@
                   "with": "src/environments/environment.test.ts"
                 }
               ]
+            },
+            "ci": {
+              "watch": false,
+              "progress": false,
+              "browsers": "ChromeHeadlessCI"
             }
           }
         },
